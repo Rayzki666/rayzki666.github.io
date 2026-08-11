@@ -3,211 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — Forge</title>
-  <meta name="description" content="Forge does not collect, store, or transmit your personal data. Your AI conversations, journal entries, quiz answers, and progress all stay entirely on your device." />
+  <title>Forge — AI Personal Coach</title>
+  <meta name="description" content="Map your growth across Mind, Body, Spirit and Vocation, with an AI coach that runs entirely on your phone." />
   <meta name="theme-color" content="#0a0a0f" />
-  <link rel="canonical" href="https://rayzki666.github.io/Forge-privacy/" />
+  <link rel="canonical" href="https://rayzki666.github.io/" />
 
-  <!-- Link previews. Without these, sharing the policy on Facebook, WhatsApp or
-       Slack renders a bare grey card with no title. -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Forge" />
-  <meta property="og:title" content="Privacy Policy — Forge" />
-  <meta property="og:description" content="Forge does not collect, store, or transmit your personal data. Your AI conversations, journal entries, quiz answers, and progress all stay entirely on your device." />
-  <meta property="og:url" content="https://rayzki666.github.io/Forge-privacy/" />
+  <meta property="og:title" content="Forge — AI Personal Coach" />
+  <meta property="og:description" content="Map your growth across Mind, Body, Spirit and Vocation, with an AI coach that runs entirely on your phone." />
+  <meta property="og:url" content="https://rayzki666.github.io/" />
   <meta property="og:image" content="https://rayzki666.github.io/Forge-privacy/IMG_2852.png" />
   <meta property="og:image:width" content="1640" />
   <meta property="og:image:height" content="624" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Privacy Policy — Forge" />
-  <meta name="twitter:description" content="Forge does not collect, store, or transmit your personal data. Your AI conversations, journal entries, quiz answers, and progress all stay entirely on your device." />
-  <meta name="twitter:image" content="https://rayzki666.github.io/Forge-privacy/IMG_2852.png" />
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #0a0a0f;
       color: #e8e8f0;
-      line-height: 1.7;
-      padding: 40px 20px 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      /* the barely perceptible lift the rest of the brand uses */
+      background-image: radial-gradient(60% 48% at 50% 42%, #1a1530 0%, rgba(14,12,24,0.55) 55%, rgba(10,10,15,0) 100%);
     }
-    .container { max-width: 720px; margin: 0 auto; }
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      color: #7c5cfc;
-      letter-spacing: -0.5px;
-      margin-bottom: 4px;
+    .wrap { width: 100%; max-width: 420px; text-align: center; }
+    svg.mark { width: 84px; height: auto; display: block; margin: 0 auto 28px; }
+    h1 {
+      font-size: 40px; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 14px;
     }
-    .tagline { color: #888; font-size: 14px; margin-bottom: 40px; }
-    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
-    .updated { color: #666; font-size: 13px; margin-bottom: 40px; }
-    h2 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #7c5cfc;
-      margin: 36px 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
+    .quadrants {
+      font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #8f8aa8; margin-bottom: 28px;
     }
-    p { margin-bottom: 14px; color: #ccc; font-size: 15px; }
-    ul { padding-left: 20px; margin-bottom: 14px; }
-    li { color: #ccc; font-size: 15px; margin-bottom: 6px; }
-    .highlight {
-      background: #1a1a2e;
-      border-left: 3px solid #7c5cfc;
-      padding: 16px 20px;
-      border-radius: 6px;
-      margin: 20px 0;
+    p.lede { font-size: 16px; line-height: 1.65; color: #b9b6cc; margin-bottom: 40px; }
+    p.lede strong { color: #e8e8f0; font-weight: 600; }
+    a.link {
+      display: block; padding: 15px 20px; margin-bottom: 12px;
+      border: 1px solid #262336; border-radius: 12px;
+      color: #cfcbe4; text-decoration: none; font-size: 15px;
+      transition: border-color .15s ease, color .15s ease;
     }
-    .highlight p { margin: 0; color: #e8e8f0; }
-    a { color: #7c5cfc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .footer { margin-top: 60px; border-top: 1px solid #222; padding-top: 24px; }
-    .footer p { font-size: 13px; color: #555; }
+    a.link:hover, a.link:focus { border-color: #7c5cfc; color: #fff; }
+    footer { margin-top: 40px; font-size: 12px; color: #4a4760; line-height: 1.8; }
+    footer a { color: #6a6688; text-decoration: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">Forge</div>
-    <div class="tagline">AI Personal Coach — Mind · Body · Spirit · Vocation</div>
+  <div class="wrap">
+    <!-- The Forge mark, straight from the vector master: the two letter paths
+         lifted out of the artwork, so the page needs no image file. -->
+    <svg class="mark" viewBox="180 300 241 279" xmlns="http://www.w3.org/2000/svg" aria-label="Forge">
+      <defs>
+        <!-- userSpaceOnUse so the stem and the middle bar sit on one continuous
+             ramp instead of each running the gradient over again -->
+        <linearGradient id="f" gradientUnits="userSpaceOnUse"
+          x1="187.5" y1="307.5" x2="414" y2="571.5">
+          <stop offset="0%" stop-color="#4EE2D4"/>
+          <stop offset="45%" stop-color="#F2F0FF"/>
+          <stop offset="100%" stop-color="#EDB4F7"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#f)" d="M187.5 571.5 L187.5 409.5 C187.5 342 224.25 307.5 291.75 307.5 L414 307.5 C411 340.5 393.75 361.5 360 361.5 L294.75 361.5 C259.5 361.5 241.5 378.75 241.5 411 L241.5 571.5 Z"/>
+      <path fill="url(#f)" d="M241.5 484.5 C255 474 267 459.75 281.25 441.75 C288.75 432 296.25 426 307.5 426 L381.75 426 C377.25 456 361.5 478.5 331.5 478.5 L264 478.5 C255 478.5 248.25 480.75 241.5 484.5 Z"/>
+    </svg>
 
-    <h1>Privacy Policy</h1>
-    <div class="updated">Last updated: June 2026</div>
+    <h1>Forge</h1>
+    <div class="quadrants">Mind · Body · Spirit · Vocation</div>
 
-    <div class="highlight">
-      <p>
-        <strong>The short version:</strong> Forge does not collect, store, or
-        transmit your personal data. Your AI conversations, journal entries,
-        quiz answers, and progress all stay entirely on your device. No account
-        is required to use the app.
-      </p>
-    </div>
-
-    <h2>1. Who We Are</h2>
-    <p>
-      Forge is a personal development application developed and published by
-      Ray Y ("we", "us", or "our"), available on the Google Play Store under
-      the package name <code>com.human30.mapper</code>.
+    <p class="lede">
+      A personal development framework that maps your growth across four dimensions
+      of a complete life — with an AI coach that runs <strong>entirely on your
+      phone</strong>. No cloud. No tracking. No account.
     </p>
 
-    <h2>2. Information We Do NOT Collect</h2>
-    <p>We do not collect or have access to:</p>
-    <ul>
-      <li>Your name, email address, or any account information</li>
-      <li>Your AI coaching conversations</li>
-      <li>Your journal entries</li>
-      <li>Your quiz answers or personal assessment scores</li>
-      <li>Your visions, goals, or any reflections you write</li>
-      <li>Your location data</li>
-      <li>Your device identifiers or advertising IDs</li>
-    </ul>
+    <a class="link" href="/Forge-privacy/">Privacy Policy →</a>
+    <a class="link" href="mailto:rayyin9@gmail.com">rayyin9@gmail.com →</a>
 
-    <h2>3. On-Device AI — How It Works</h2>
-    <div class="highlight">
-      <p>
-        The AI coach in Forge runs a large language model (LLM) downloaded
-        directly to your phone. All inference — every question you ask and
-        every response the AI generates — happens locally on your device.
-        <strong>No conversation data is ever sent to any server, including ours.</strong>
-      </p>
-    </div>
-    <p>
-      The model file is downloaded once from a public repository (Hugging Face)
-      over a standard HTTPS connection and stored in your device's private
-      application directory. After download, the AI works with no internet
-      connection whatsoever.
-    </p>
-
-    <h2>4. Data Stored Locally on Your Device</h2>
-    <p>
-      Forge stores the following data locally using Android's private app
-      storage. This data never leaves your device and is deleted when you
-      uninstall the app:
-    </p>
-    <ul>
-      <li>Your quiz answers and quadrant scores</li>
-      <li>Journal entries and channel reflections you write</li>
-      <li>AI coaching conversation history</li>
-      <li>App progress (XP, streak, completed channels, programs)</li>
-      <li>Vision statements and goals you enter</li>
-      <li>Subscription status (stored locally, verified via the payment processor)</li>
-    </ul>
-
-    <h2>5. Subscription &amp; Payment</h2>
-    <p>
-      Forge offers an optional subscription through the Google Play Store,
-      processed by Google. We do not handle or store any payment information.
-      Purchase receipts and subscription status are managed entirely by Google
-      Play and Superwall (our paywall infrastructure provider). Please review
-      <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>
-      and
-      <a href="https://superwall.com/privacy" target="_blank">Superwall's Privacy Policy</a>
-      for details on their data practices.
-    </p>
-    <p>
-      Superwall may receive anonymised, non-identifying signals related to
-      subscription events (e.g. "paywall shown", "purchase completed") to
-      facilitate billing. No personal data or app content is shared.
-    </p>
-
-    <h2>6. Data Deletion</h2>
-    <p>
-  You can delete your data at any time:
-   </p>
-   <ul>
-  <li><strong>On-device data</strong> (your scores, journal entries, AI
-  conversations, vision statements, and all other app data) is removed
-  immediately and permanently when you <strong>uninstall the app</strong>.
-  This data never leaves your device, so uninstalling fully erases it.</li>
-  <li><strong>Subscription &amp; purchase records</strong> processed by our
-  billing provider (Superwall/Google Play) can be deleted on request. Email us
-  at <a href="mailto:rayyin9@gmail.com">rayyin9@gmail.com</a> with the subject
-  "Data deletion request" and we will remove your associated purchase data.</li>
-  </ul>
-    
-    <h2>7. Permissions We Request</h2>
-    <ul>
-      <li>
-        <strong>Internet access</strong> — required to download the AI model
-        file on first setup and to process subscription payments via Google
-        Play. Not used during AI conversations.
-      </li>
-      <li>
-        <strong>Notifications</strong> — optional, used only to alert you when
-        a timed channel practice ends. You can disable this at any time in your
-        device settings.
-      </li>
-    </ul>
-
-    <h2>8. Children's Privacy</h2>
-    <p>
-      Forge is intended for users aged 18 and older. We do not knowingly
-      collect any information from children under 18. If you believe a minor
-      is using the app, please contact us so we can assist.
-    </p>
-
-    <h29. Changes to This Policy</h2>
-    <p>
-      We may update this Privacy Policy from time to time. Changes will be
-      reflected on this page with an updated "Last updated" date. Continued
-      use of the app after changes constitutes acceptance of the revised policy.
-      For significant changes, we will provide notice within the app.
-    </p>
-
-    <h2>9. Contact</h2>
-    <p>
-      Questions or concerns about this Privacy Policy? Contact us at:
-      <a href="mailto:rayyin9@gmail.com">rayyin9@gmail.com</a>
-    </p>
-
-    <div class="footer">
-      <p>&copy; 2026 Ray Y. All rights reserved.</p>
-      <p style="margin-top:8px;">
-        Forge App · <a href="mailto:rayyin9@gmail.com">rayyin9@gmail.com</a>
-      </p>
-    </div>
+    <footer>
+      © 2026 Ray Y<br />
+      Forge · com.human30.mapper
+    </footer>
   </div>
 </body>
 </html>
-
