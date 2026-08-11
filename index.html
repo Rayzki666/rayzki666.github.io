@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forge — AI Personal Coach</title>
-  <meta name="description" content="Map your growth across Mind, Body, Spirit and Vocation, with an AI coach that runs entirely on your phone." />
+  <meta name="description" content="Map your growth across Mind, Body, Spirit and Vocation, with an AI coach that runs entirely on your phone. Now in closed testing." />
   <meta name="theme-color" content="#0a0a0f" />
   <link rel="canonical" href="https://rayzki666.github.io/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Forge" />
   <meta property="og:title" content="Forge — AI Personal Coach" />
-  <meta property="og:description" content="Map your growth across Mind, Body, Spirit and Vocation, with an AI coach that runs entirely on your phone." />
+  <meta property="og:description" content="Map your growth across Mind, Body, Spirit and Vocation, with an AI coach that runs entirely on your phone. Now in closed testing." />
   <meta property="og:url" content="https://rayzki666.github.io/" />
   <meta property="og:image" content="https://rayzki666.github.io/Forge-privacy/IMG_2852.png" />
   <meta property="og:image:width" content="1640" />
@@ -20,68 +20,176 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --ink: #e8e8f0;
+      --muted: #b9b6cc;
+      --dim: #8f8aa8;
+      --line: #262336;
+      --accent: #7c5cfc;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0a0a0f;
-      color: #e8e8f0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 24px;
-      /* the barely perceptible lift the rest of the brand uses */
-      background-image: radial-gradient(60% 48% at 50% 42%, #1a1530 0%, rgba(14,12,24,0.55) 55%, rgba(10,10,15,0) 100%);
+      background: var(--bg);
+      background-image: radial-gradient(62% 40% at 50% 22%, #1a1530 0%, rgba(14,12,24,0.55) 55%, rgba(10,10,15,0) 100%);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 56px 24px 72px;
+      -webkit-font-smoothing: antialiased;
     }
-    .wrap { width: 100%; max-width: 420px; text-align: center; }
-    svg.mark { width: 84px; height: auto; display: block; margin: 0 auto 28px; }
-    h1 {
-      font-size: 40px; font-weight: 700; letter-spacing: -0.02em;
-      color: #fff; margin-bottom: 14px;
+    .wrap { width: 100%; max-width: 440px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 44px; }
+    svg.mark { width: 78px; height: auto; display: block; margin: 0 auto 24px; }
+    h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; }
+    .quadrants { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); }
+
+    p.lede { font-size: 16px; color: var(--muted); margin-bottom: 22px; }
+    p.lede strong { color: var(--ink); font-weight: 600; }
+
+    /* Early access ------------------------------------------------------- */
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin: 36px 0 28px;
+      background: rgba(255,255,255,0.02);
     }
-    .quadrants {
-      font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: #8f8aa8; margin-bottom: 28px;
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 10px;
     }
-    p.lede { font-size: 16px; line-height: 1.65; color: #b9b6cc; margin-bottom: 40px; }
-    p.lede strong { color: #e8e8f0; font-weight: 600; }
+    .panel h2 { font-size: 21px; font-weight: 650; color: #fff; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .panel p { font-size: 14.5px; color: var(--muted); margin-bottom: 18px; }
+
+    label { display: block; font-size: 13px; color: var(--dim); margin: 0 0 6px; }
+    .hint { font-size: 12.5px; color: #6f6b88; margin: -2px 0 14px; line-height: 1.5; }
+    input, select {
+      width: 100%; padding: 13px 14px; margin-bottom: 4px;
+      background: #121020; color: var(--ink);
+      border: 1px solid var(--line); border-radius: 10px;
+      font-size: 16px; /* 16px stops iOS zooming the page on focus */
+      font-family: inherit;
+      appearance: none; -webkit-appearance: none;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--accent); }
+    select { background-image: none; }
+    button {
+      width: 100%; padding: 15px; margin-top: 12px;
+      background: var(--accent); color: #fff;
+      border: 0; border-radius: 10px;
+      font-size: 16px; font-weight: 600; font-family: inherit;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.55; cursor: default; }
+    .fineprint { font-size: 12px; color: #625e7d; margin-top: 14px; line-height: 1.6; }
+
+    .done { display: none; text-align: center; padding: 8px 0 4px; }
+    .done h2 { color: #fff; }
+    .done .tick { font-size: 30px; margin-bottom: 8px; }
+    body.sent .form-live { display: none; }
+    body.sent .done { display: block; }
+
     a.link {
-      display: block; padding: 15px 20px; margin-bottom: 12px;
-      border: 1px solid #262336; border-radius: 12px;
+      display: block; padding: 14px 18px; margin-bottom: 10px;
+      border: 1px solid var(--line); border-radius: 12px;
       color: #cfcbe4; text-decoration: none; font-size: 15px;
-      transition: border-color .15s ease, color .15s ease;
     }
-    a.link:hover, a.link:focus { border-color: #7c5cfc; color: #fff; }
-    footer { margin-top: 40px; font-size: 12px; color: #4a4760; line-height: 1.8; }
-    footer a { color: #6a6688; text-decoration: none; }
+    a.link:hover, a.link:focus { border-color: var(--accent); color: #fff; }
+    footer { margin-top: 34px; font-size: 12px; color: #4a4760; line-height: 1.8; text-align: center; }
+    iframe.sink { display: none; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- The Forge mark, straight from the vector master: the two letter paths
-         lifted out of the artwork, so the page needs no image file. -->
-    <svg class="mark" viewBox="180 300 241 279" xmlns="http://www.w3.org/2000/svg" aria-label="Forge">
-      <defs>
-        <!-- userSpaceOnUse so the stem and the middle bar sit on one continuous
-             ramp instead of each running the gradient over again -->
-        <linearGradient id="f" gradientUnits="userSpaceOnUse"
-          x1="187.5" y1="307.5" x2="414" y2="571.5">
-          <stop offset="0%" stop-color="#4EE2D4"/>
-          <stop offset="45%" stop-color="#F2F0FF"/>
-          <stop offset="100%" stop-color="#EDB4F7"/>
-        </linearGradient>
-      </defs>
-      <path fill="url(#f)" d="M187.5 571.5 L187.5 409.5 C187.5 342 224.25 307.5 291.75 307.5 L414 307.5 C411 340.5 393.75 361.5 360 361.5 L294.75 361.5 C259.5 361.5 241.5 378.75 241.5 411 L241.5 571.5 Z"/>
-      <path fill="url(#f)" d="M241.5 484.5 C255 474 267 459.75 281.25 441.75 C288.75 432 296.25 426 307.5 426 L381.75 426 C377.25 456 361.5 478.5 331.5 478.5 L264 478.5 C255 478.5 248.25 480.75 241.5 484.5 Z"/>
-    </svg>
-
-    <h1>Forge</h1>
-    <div class="quadrants">Mind · Body · Spirit · Vocation</div>
+    <header>
+      <!-- The Forge mark, straight from the vector master: the two letter paths
+           lifted out of the artwork, so the page needs no image file. -->
+      <svg class="mark" viewBox="180 300 241 279" xmlns="http://www.w3.org/2000/svg" aria-label="Forge">
+        <defs>
+          <!-- userSpaceOnUse so the stem and the middle bar sit on one continuous
+               ramp instead of each running the gradient over again -->
+          <linearGradient id="f" gradientUnits="userSpaceOnUse"
+            x1="187.5" y1="307.5" x2="414" y2="571.5">
+            <stop offset="0%" stop-color="#4EE2D4"/>
+            <stop offset="45%" stop-color="#F2F0FF"/>
+            <stop offset="100%" stop-color="#EDB4F7"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#f)" d="M187.5 571.5 L187.5 409.5 C187.5 342 224.25 307.5 291.75 307.5 L414 307.5 C411 340.5 393.75 361.5 360 361.5 L294.75 361.5 C259.5 361.5 241.5 378.75 241.5 411 L241.5 571.5 Z"/>
+        <path fill="url(#f)" d="M241.5 484.5 C255 474 267 459.75 281.25 441.75 C288.75 432 296.25 426 307.5 426 L381.75 426 C377.25 456 361.5 478.5 331.5 478.5 L264 478.5 C255 478.5 248.25 480.75 241.5 484.5 Z"/>
+      </svg>
+      <h1>Forge</h1>
+      <div class="quadrants">Mind · Body · Spirit · Vocation</div>
+    </header>
 
     <p class="lede">
       A personal development framework that maps your growth across four dimensions
       of a complete life — with an AI coach that runs <strong>entirely on your
       phone</strong>. No cloud. No tracking. No account.
     </p>
+
+    <section class="panel">
+      <div class="form-live">
+        <div class="eyebrow">Closed testing</div>
+        <h2>Get early access</h2>
+        <p>
+          Forge is in closed testing on Google Play before public launch. Testers get
+          the full app, free, for the whole test period.
+        </p>
+
+        <!-- Posts into the Google Form backend, aimed at a hidden iframe so the
+             browser never navigates away to Google's confirmation page. Responses
+             land in the linked Sheet, which is the column that gets pasted into
+             the Play Console tester list. -->
+        <form id="signup" class="signup"
+              action="https://docs.google.com/forms/d/e/1FAIpQLSdksn6nTO9Z4NdiJt6Wk9bfszMgTOoMePqqFeECqtZFo_bFTw/formResponse"
+              method="POST" target="sink">
+
+          <label for="email">Your Google account email</label>
+          <input id="email" name="entry.747647194" type="email" required
+                 autocomplete="email" inputmode="email"
+                 placeholder="you@gmail.com" />
+          <div class="hint">
+            Must be the Google account signed in on your Android phone — Play grants
+            access by email, so another address won't reach you.
+          </div>
+
+          <label for="device">Which Android phone will you use?</label>
+          <input id="device" name="entry.1185108795" type="text" required
+                 placeholder="e.g. Pixel 7a, Galaxy A54" />
+          <div class="hint">
+            The AI runs on your device, so speed depends on the hardware. Knowing what
+            it's running on is genuinely useful.
+          </div>
+
+          <label for="quadrant">Which feels weakest right now? <span style="color:#5c5878">(optional)</span></label>
+          <select id="quadrant" name="entry.991311997">
+            <option value="">Prefer not to say</option>
+            <option>Mind</option>
+            <option>Body</option>
+            <option>Spirit</option>
+            <option>Vocation</option>
+          </select>
+
+          <button type="submit">Request access</button>
+        </form>
+
+        <div class="fineprint">
+          Android only. Access is granted by hand, so there's a short wait — you'll get
+          an email with the join link. Your address is used for that and nothing else.
+        </div>
+      </div>
+
+      <div class="done">
+        <div class="tick">✓</div>
+        <h2>You're on the list</h2>
+        <p>
+          You'll get an email with the join link once access is granted. It arrives from
+          rayyin9@gmail.com — worth checking spam if it hasn't shown up in a day or two.
+        </p>
+      </div>
+    </section>
 
     <a class="link" href="/Forge-privacy/">Privacy Policy →</a>
     <a class="link" href="mailto:rayyin9@gmail.com">rayyin9@gmail.com →</a>
@@ -91,5 +199,25 @@
       Forge · com.human30.mapper
     </footer>
   </div>
+
+  <iframe class="sink" name="sink" title="form target"></iframe>
+
+  <script>
+    // The iframe fires load once on page open and again when the POST completes;
+    // the flag skips the first so the thank-you only shows after a real submit.
+    (function () {
+      var form = document.getElementById('signup');
+      var sink = document.querySelector('iframe.sink');
+      var submitted = false;
+      form.addEventListener('submit', function () {
+        submitted = true;
+        form.querySelector('button').disabled = true;
+        form.querySelector('button').textContent = 'Sending…';
+      });
+      sink.addEventListener('load', function () {
+        if (submitted) document.body.classList.add('sent');
+      });
+    })();
+  </script>
 </body>
 </html>
