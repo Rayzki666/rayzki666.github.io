@@ -146,20 +146,6 @@
     }
     .reading b { color: var(--ink); font-weight: 600; }
 
-    /* ── Launch stage ───────────────────────────────────────────────────────
-       The page has two states and the whole switch is the data-stage attribute
-       on <body>. CSS does the swap, not script, so it still resolves correctly
-       if JS never runs. On launch day: prelaunch → live, one word, one line. */
-    [data-stage="prelaunch"] .when-live { display: none; }
-    [data-stage="live"] .when-prelaunch { display: none; }
-
-    .status {
-      display: inline-block; margin-top: 30px;
-      padding: 7px 15px 6px; border: 1px solid var(--line); border-radius: 999px;
-      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--dim); font-weight: 600;
-    }
-
     /* ── Install ───────────────────────────────────────────────────────── */
     .cta { display: block; width: 100%; margin-top: 34px; padding: 17px 20px;
       background: var(--accent); color: #fff; text-decoration: none;
@@ -204,8 +190,6 @@
     .notify.sent .notify-live { display: none; }
     .notify-done { display: none; font-size: 14px; color: var(--muted); text-align: center; }
     .notify.sent .notify-done { display: block; }
-    .notify.bare { border: none; padding: 0; margin-bottom: 0; }
-    .notify.bare .notify-done { margin-top: 30px; }
 
     a.link { display: block; padding: 13px 0; color: var(--dim); text-decoration: none;
       font-size: 14.5px; border-top: 1px solid rgba(255,255,255,0.05); }
@@ -225,9 +209,7 @@
     }
   </style>
 </head>
-<!-- Live since 31 Aug 2026. Set this back to "prelaunch" only if the listing
-     is ever pulled — it swaps the Play button for a waitlist. -->
-<body data-stage="live">
+<body>
 
 <header>
   <!-- Containment field: rays accumulate inside the boundary and terminate
@@ -262,9 +244,6 @@
       is furthest behind.
     </p>
 
-    <!-- States up front that there is no install button yet, so the page reads
-         as early rather than as broken. -->
-    <div class="status when-prelaunch">Coming to Google Play</div>
   </div>
 </header>
 
@@ -291,33 +270,11 @@
 
     <div class="reading" id="reading" aria-live="polite"></div>
 
-    <!-- ── Pre-launch: waitlist ─────────────────────────────────────────
-         One field. Asking for a Google account address is over — that was only
-         ever needed to add people to the closed test, and collecting it now
-         would be gathering data with no purpose left. -->
-    <div class="notify bare when-prelaunch">
-      <div class="notify-live">
-        <form class="notifyform" action="https://docs.google.com/forms/d/e/1FAIpQLSdksn6nTO9Z4NdiJt6Wk9bfszMgTOoMePqqFeECqtZFo_bFTw/formResponse" method="POST" target="sink">
-          <label class="eyebrow" for="launch-email" style="display:block;margin:34px 0 8px">Email</label>
-          <input id="launch-email" name="entry.747647194" type="email" required autocomplete="email" inputmode="email" placeholder="you@example.com" />
-          <input type="hidden" name="entry.1185108795" value="Launch waitlist — Android" />
-          <button class="cta" type="submit" style="margin-top:10px">Tell me when it's live</button>
-        </form>
-      </div>
-      <div class="notify-done">✓ &nbsp;On the list. You'll hear from rayyin9@gmail.com the day it ships.</div>
-      <p class="caveat">
-        Android first. Free to start, no account.<br />
-        The coach downloads a language model on first use — about 1.1 GB, or
-        380 MB on smaller phones. After that it runs on your device, offline.
-      </p>
-    </div>
-
-    <!-- ── Live: the install button ─────────────────────────────────────── -->
-    <a class="cta when-live" id="install"
+    <a class="cta" id="install"
        href="https://play.google.com/store/apps/details?id=com.human30.mapper&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">
       Get Forge on Google Play
     </a>
-    <p class="caveat when-live">
+    <p class="caveat">
       Android. Free to start, no account.<br />
       The coach downloads a language model on first use — about 1.1 GB, or 380 MB
       on smaller phones. After that it runs on your device, offline.
@@ -359,9 +316,7 @@
   <div class="rule"></div>
 
   <footer>
-    <!-- Held back until launch: before then the page already has a waitlist
-         above, and two email boxes on one page is a choice nobody wants. -->
-    <div class="notify when-live">
+    <div class="notify">
       <div class="notify-live">
         <div class="eyebrow" style="margin-bottom:10px">On iPhone?</div>
         <p>Forge is Android-only for now. Leave an address and I'll tell you when iOS lands — used for that and nothing else.</p>
@@ -541,6 +496,26 @@
   })();
 
   draw();
+
+  /* ── Source tagging ───────────────────────────────────────────────────
+     Every channel points here with its own ?src= — ?src=tiktok, ?src=reddit,
+     ?src=xda — and that value is forwarded into the Play Store's referrer, so
+     Play Console's acquisition report can tell the channels apart. Without it
+     every link that goes through this page lands in one bucket called
+     "landing" and the question "which channel actually works" has no answer.
+
+     TikTok and several other platforms reject a URL whose query string carries
+     percent-encoding, which is why the tag rides on this page as a plain word
+     and only becomes an encoded referrer at the moment of the click. */
+  (function () {
+    var a = document.getElementById("install");
+    if (!a) return;
+    var raw = (new URLSearchParams(location.search).get("src") || "").toLowerCase();
+    var src = /^[a-z0-9_-]{1,24}$/.test(raw) ? raw : "landing";
+    var medium = src === "landing" ? "web" : "social";
+    a.href = "https://play.google.com/store/apps/details?id=com.human30.mapper"
+           + "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=" + medium);
+  })();
 
   /* ── iOS notify form ──────────────────────────────────────────────────
      The iframe fires load once on page open and again when the POST
