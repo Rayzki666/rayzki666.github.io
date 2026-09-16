@@ -156,6 +156,9 @@
     .cta:hover, .cta:focus { background: #8f72ff; }
     .cta:disabled { background: #4b3d8a; cursor: default; }
     .caveat { font-size: 13px; color: var(--faint); margin-top: 14px; line-height: 1.65; text-align: center; }
+    .cta-hero { margin-top: 28px; }
+    .cta-hero + .caveat { margin-top: 12px; }
+    a.link-play { color: var(--ink); }
 
     /* ── Sources ───────────────────────────────────────────────────────── */
     .source { display: grid; grid-template-columns: 8px 1fr; gap: 14px; align-items: start; padding: 13px 0; }
@@ -176,9 +179,7 @@
       font-family: inherit;
     }
     .notify input:focus { outline: none; border-color: var(--accent); }
-    /* :not(.cta) — the pre-launch waitlist submit IS the page's primary button
-       and must keep the filled .cta treatment; this quiet outline style is only
-       for the secondary iOS form in the footer. */
+    /* :not(.cta) — Quiet outline for the iOS notify form. Play install uses .cta. */
     .notify button:not(.cta) {
       width: 100%; padding: 13px; background: transparent; color: var(--muted);
       border: 1px solid var(--line); border-radius: 10px;
@@ -244,6 +245,12 @@
       is furthest behind.
     </p>
 
+    <a class="cta cta-hero install-link" id="install-hero"
+       href="https://play.google.com/store/apps/details?id=com.human30.mapper&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">
+      Get Forge on Google Play
+    </a>
+    <p class="caveat">Android. Free to start · on-device AI · no account</p>
+
   </div>
 </header>
 
@@ -270,7 +277,7 @@
 
     <div class="reading" id="reading" aria-live="polite"></div>
 
-    <a class="cta" id="install"
+    <a class="cta install-link" id="install"
        href="https://play.google.com/store/apps/details?id=com.human30.mapper&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">
       Get Forge on Google Play
     </a>
@@ -294,6 +301,10 @@
       Most apps that say "private" mean <em>we promise not to look</em>. This one
       means the data physically never leaves.
     </p>
+    <a class="cta install-link" id="install-privacy"
+       href="https://play.google.com/store/apps/details?id=com.human30.mapper&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">
+      Get Forge on Google Play
+    </a>
   </section>
 
   <div class="rule"><span>Fig. III · Sources</span></div>
@@ -333,6 +344,8 @@
       <div class="notify-done">✓ &nbsp;On the list. You'll hear from rayyin9@gmail.com.</div>
     </div>
 
+    <a class="link link-play install-link" id="install-footer"
+       href="https://play.google.com/store/apps/details?id=com.human30.mapper&amp;referrer=utm_source%3Dlanding%26utm_medium%3Dweb">Get Forge on Google Play →</a>
     <a class="link" href="/Forge-privacy/">Privacy Policy →</a>
     <a class="link" href="mailto:rayyin9@gmail.com">rayyin9@gmail.com →</a>
 
@@ -508,13 +521,14 @@
      percent-encoding, which is why the tag rides on this page as a plain word
      and only becomes an encoded referrer at the moment of the click. */
   (function () {
-    var a = document.getElementById("install");
-    if (!a) return;
     var raw = (new URLSearchParams(location.search).get("src") || "").toLowerCase();
     var src = /^[a-z0-9_-]{1,24}$/.test(raw) ? raw : "landing";
     var medium = src === "landing" ? "web" : "social";
-    a.href = "https://play.google.com/store/apps/details?id=com.human30.mapper"
-           + "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=" + medium);
+    var href = "https://play.google.com/store/apps/details?id=com.human30.mapper"
+             + "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=" + medium);
+    Array.prototype.forEach.call(document.querySelectorAll("a.install-link"), function (a) {
+      a.href = href;
+    });
   })();
 
   /* ── iOS notify form ──────────────────────────────────────────────────
