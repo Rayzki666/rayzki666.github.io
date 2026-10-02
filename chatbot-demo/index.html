@@ -6,153 +6,128 @@
 <title>AI FAQ Chatbot Demo – Small Business</title>
 <meta name="description" content="Live demo of a zero-cost FAQ chatbot for small business websites. The businesses shown are fictional.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..600&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --brand:#2f6b4f; --bg:#08090c; --bg2:#0e1015; --card:#12141a; --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14); --ink:#eef0f4; --mute:#8d93a1; --ease:cubic-bezier(.2,.75,.15,1);
-    --glow:color-mix(in oklab, var(--brand) 70%, #7c5cff); --soft:color-mix(in oklab, var(--brand) 18%, transparent); --brandL:color-mix(in oklab, var(--brand) 55%, white); }
+  :root { --brand:#2f6b4f; --paper:#efeee9; --paper2:#f8f7f3; --ink:#16181d; --mute:#5a5e66; --line:#d5d3cb; --ease:cubic-bezier(.2,.75,.15,1); }
   *,*::before,*::after { box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { margin:0; font:400 16px/1.6 'Inter Tight', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  a { color:inherit; text-decoration:none; }
+  body { margin:0; font:400 17px/1.6 'Schibsted Grotesk', system-ui, sans-serif; color:var(--ink); background:var(--paper); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a { color:inherit; }
   button { font:inherit; }
-  .wrap { width:min(100% - 40px, 1240px); margin-inline:auto; }
-  .serif { font-family:'Instrument Serif', Georgia, serif; font-weight:400; }
-  /* aurora */
-  .aurora { position:absolute; inset:0 0 auto; height:1100px; overflow:hidden; pointer-events:none; z-index:0; }
-  .aurora::before, .aurora::after { content:""; position:absolute; border-radius:50%; filter:blur(90px); opacity:.55; }
-  .aurora::before { width:900px; height:600px; left:50%; top:-260px; transform:translateX(-30%); background:radial-gradient(closest-side, var(--glow), transparent); animation:drift 16s ease-in-out infinite alternate; }
-  .aurora::after { width:700px; height:500px; left:-200px; top:120px; background:radial-gradient(closest-side, color-mix(in oklab, var(--brand) 60%, #00c2ff), transparent); opacity:.28; animation:drift 20s ease-in-out infinite alternate-reverse; }
-  @keyframes drift { to { transform:translate(-10%, 60px) scale(1.1); } }
-  .gridbg { position:absolute; inset:0 0 auto; height:1000px; z-index:0; pointer-events:none; background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:64px 64px; mask-image:radial-gradient(ellipse 70% 60% at 50% 20%, #000 30%, transparent 75%); opacity:.6; }
+  .wrap { width:min(100% - 40px, 1200px); margin-inline:auto; }
+  :focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
   /* nav */
-  header.nav { position:sticky; top:0; z-index:40; backdrop-filter:blur(14px) saturate(1.3); background:rgba(8,9,12,.6); border-bottom:1px solid var(--line); }
-  header.nav .wrap { display:flex; align-items:center; gap:22px; height:70px; }
-  .brandmark { display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:-.01em; }
-  .brandmark .sq { width:30px; height:30px; border-radius:9px; background:linear-gradient(135deg, var(--brandL), var(--brand)); display:grid; place-items:center; box-shadow:0 0 0 1px rgba(255,255,255,.15) inset, 0 8px 20px -6px var(--brand); }
-  .pill { display:inline-flex; align-items:center; gap:7px; padding:5px 11px; border-radius:999px; font-size:12px; font-weight:500; color:#d6d9e0; background:rgba(255,255,255,.05); border:1px solid var(--line2); }
-  .pill .dot { width:7px; height:7px; border-radius:50%; background:#36d27f; box-shadow:0 0 0 3px rgba(54,210,127,.2); }
-  header.nav nav { margin-left:auto; display:flex; gap:26px; font-size:14px; color:#b9bfcb; }
-  header.nav nav a:hover { color:#fff; }
-  .btn { display:inline-flex; align-items:center; gap:9px; padding:12px 18px; border-radius:12px; font-weight:600; font-size:14.5px; border:0; cursor:pointer; transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s; }
-  .btn-white { background:#fff; color:#0a0b0e; box-shadow:0 10px 30px -10px rgba(255,255,255,.35); }
-  .btn-white:hover { transform:translateY(-2px); }
-  .btn-ghost { background:rgba(255,255,255,.04); color:#fff; border:1px solid var(--line2); }
-  .btn-ghost:hover { background:rgba(255,255,255,.08); }
+  header.nav { position:sticky; top:0; z-index:40; background:var(--paper); border-bottom:1px solid var(--line); }
+  header.nav .wrap { display:flex; align-items:center; gap:22px; min-height:64px; }
+  .brandmark { display:flex; align-items:center; gap:10px; font-weight:700; text-decoration:none; min-height:44px; }
+  .brandmark .sq { width:30px; height:30px; border-radius:6px; background:var(--ink); display:grid; place-items:center; }
+  .pill { font-size:13px; color:var(--mute); border:1px solid var(--line); padding:4px 10px; border-radius:4px; }
+  .pill .dot { display:none; }
+  header.nav nav { margin-left:auto; display:flex; gap:24px; font-size:15px; }
+  header.nav nav a { text-decoration:none; padding:12px 0; }
+  header.nav nav a:hover { text-decoration:underline; }
+  .btn { display:inline-flex; align-items:center; gap:9px; min-height:46px; padding:0 18px; border-radius:6px; font-weight:600; font-size:15px; border:0; cursor:pointer; }
+  .btn-white { background:var(--ink); color:#fff; }
   /* hero */
-  .hero { position:relative; z-index:1; padding:72px 0 40px; }
-  .hero-grid { display:grid; grid-template-columns:.95fr 1.05fr; gap:56px; align-items:center; }
+  .hero { padding:56px 0 48px; }
+  .hero-grid { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:56px; align-items:start; }
   .hero-grid > * { min-width:0; }
-  .badge { display:inline-flex; align-items:center; gap:10px; padding:6px 14px 6px 6px; border-radius:999px; border:1px solid var(--line2); background:rgba(255,255,255,.03); font-size:13px; color:#c9ced8; }
-  .badge b { background:var(--brand); color:#fff; padding:3px 9px; border-radius:999px; font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; }
-  h1 { font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-size:clamp(48px, 6.4vw, 92px); line-height:.98; letter-spacing:-.025em; margin:26px 0 22px; }
-  h1 em { font-style:italic; background:linear-gradient(100deg, #fff 10%, var(--brandL) 60%, var(--glow)); -webkit-background-clip:text; background-clip:text; color:transparent; padding-right:.06em; }
-  .lede { color:#aab0bd; font-size:clamp(16.5px, 1.25vw, 18.5px); max-width:50ch; margin:0; }
-  .switch { margin-top:34px; }
-  .switch .lbl { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); margin-bottom:10px; }
-  .seg { display:inline-flex; padding:5px; gap:4px; border-radius:14px; background:rgba(255,255,255,.04); border:1px solid var(--line2); flex-wrap:wrap; }
-  .seg a { display:flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; font-size:14.5px; font-weight:500; color:#c3c8d2; transition:background .25s, color .25s; }
-  .seg a:hover { color:#fff; background:rgba(255,255,255,.05); }
-  .seg a.on { background:#fff; color:#0a0b0e; box-shadow:0 6px 18px -6px rgba(0,0,0,.6); }
-  .seg a i { width:8px; height:8px; border-radius:50%; }
-  .tries { margin-top:26px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-  .tries span { font-size:13px; color:var(--mute); margin-right:4px; }
-  .tries button { border:1px dashed var(--line2); background:transparent; color:#dfe2e8; padding:8px 13px; border-radius:999px; font-size:13.5px; cursor:pointer; transition:all .2s; }
-  .tries button:hover { border-style:solid; border-color:var(--brandL); color:#fff; background:var(--soft); }
+  .badge { display:inline-block; font-size:14px; color:var(--mute); }
+  .badge b { color:var(--ink); }
+  h1 { font-family:'Newsreader', Georgia, serif; font-weight:500; font-size:clamp(40px, 1.5rem + 2.6vw, 62px); line-height:1.04; letter-spacing:-.015em; margin:14px 0 20px; font-variation-settings:"opsz" 72; }
+  .lede { color:#3b3f47; font-size:18.5px; max-width:44ch; margin:0; }
+  .switch { margin-top:32px; }
+  .switch .lbl { font-size:15px; font-weight:600; margin-bottom:8px; }
+  .seg { display:flex; gap:8px; flex-wrap:wrap; }
+  .seg a { display:flex; align-items:center; gap:8px; min-height:46px; padding:0 16px; border-radius:6px; font-size:15.5px; font-weight:500; text-decoration:none; border:1px solid var(--line); background:var(--paper2); }
+  .seg a:hover { border-color:var(--ink); }
+  .seg a.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .seg a i { width:10px; height:10px; border-radius:2px; }
+  .tries { margin-top:24px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .tries span { font-size:15px; color:var(--mute); margin-right:4px; width:100%; }
+  .tries button { min-height:44px; border:1px dashed #a9a69c; background:transparent; color:var(--ink); padding:0 14px; border-radius:6px; font-size:15px; cursor:pointer; }
+  .tries button:hover { border-style:solid; border-color:var(--brand); }
   /* window mock */
-  .window { position:relative; border-radius:20px; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); padding:1px; box-shadow:0 60px 120px -40px rgba(0,0,0,.9), 0 0 0 1px var(--line) inset; }
-  .window::before { content:""; position:absolute; inset:-1px; border-radius:21px; padding:1px; background:linear-gradient(140deg, var(--brandL), transparent 35%, transparent 65%, var(--glow)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.7; pointer-events:none; }
-  .win-in { border-radius:19px; overflow:hidden; background:#0d0f14; }
-  .win-bar { display:flex; align-items:center; gap:7px; padding:12px 14px; background:#111319; border-bottom:1px solid var(--line); }
-  .win-bar i { width:11px; height:11px; border-radius:50%; background:#2b2f38; }
-  .win-bar i:nth-child(1){ background:#ff5f57; } .win-bar i:nth-child(2){ background:#febc2e; } .win-bar i:nth-child(3){ background:#28c840; }
-  .url { margin:0 auto; font-size:12px; color:#8d93a1; background:#0b0d11; border:1px solid var(--line); padding:5px 14px; border-radius:8px; min-width:46%; text-align:center; }
-  .win-body { position:relative; height:600px; background:radial-gradient(120% 70% at 0% 0%, var(--soft), transparent 60%), #f6f5f2; color:#1c1d21; overflow:hidden; }
-  .site { padding:30px 30px; max-width:calc(100% - 410px); min-width:200px; }
-  .site .tag { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:color-mix(in oklab, var(--brand) 80%, black); font-weight:600; }
-  .site h2 { font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-size:clamp(30px,2.6vw,40px); line-height:1; letter-spacing:-.02em; margin:12px 0 12px; }
-  .site p { font-size:14px; color:#4b4e57; margin:0; }
+  .window { border:1px solid #c6c3b9; border-radius:10px; background:#fff; box-shadow:0 24px 40px -30px rgba(0,0,0,.45); overflow:hidden; }
+  .win-in { overflow:hidden; }
+  .win-bar { display:flex; align-items:center; gap:7px; padding:10px 14px; background:#e6e4dd; border-bottom:1px solid #d0cdc3; }
+  .win-bar i { width:10px; height:10px; border-radius:50%; background:#c4c1b7; }
+  .url { margin:0 auto; font-size:12.5px; color:#5a5e66; background:#f5f4ef; border:1px solid #d0cdc3; padding:4px 14px; border-radius:4px; min-width:46%; text-align:center; }
+  .win-body { position:relative; height:600px; background:#f6f5f1; color:#1c1d21; overflow:hidden; }
+  .site { padding:30px; max-width:calc(100% - 410px); min-width:200px; }
+  .site .tag { font-size:13px; color:color-mix(in oklab, var(--brand) 80%, black); font-weight:600; }
+  .site h2 { font-family:'Newsreader', Georgia, serif; font-weight:500; font-size:clamp(28px,2.4vw,38px); line-height:1.05; margin:10px 0 12px; }
+  .site p { font-size:14.5px; color:#4b4e57; margin:0; }
   .site .sk { margin-top:24px; display:grid; gap:10px; }
-  .site .sk div { height:10px; border-radius:6px; background:#e4e2dc; }
-  .site .tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:22px; }
-  .site .tiles div { height:96px; border-radius:12px; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 22%, #f6f5f2), #ebe9e3); }
+  .site .sk div { height:9px; border-radius:2px; background:#e2e0d9; }
+  .site .tiles { display:grid; grid-template-columns:1.4fr 1fr; gap:10px; margin-top:22px; }
+  .site .tiles div { height:96px; border-radius:2px; background:repeating-linear-gradient(135deg,#e7e5de 0 8px,#efede7 8px 16px); border:1px solid #dddad2; }
   /* chat (inline in window) */
-  #cb { position:absolute; right:22px; bottom:22px; width:370px; height:556px; max-height:calc(100% - 44px); display:flex; flex-direction:column; background:#fff; color:#17181c; border-radius:20px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(15,17,22,.45), 0 0 0 1px rgba(0,0,0,.06); z-index:2; }
+  #cb { position:absolute; right:22px; bottom:22px; width:370px; height:556px; max-height:calc(100% - 44px); display:flex; flex-direction:column; background:#fff; color:#17181c; border-radius:10px; overflow:hidden; box-shadow:0 18px 40px -18px rgba(15,17,22,.45), 0 0 0 1px rgba(0,0,0,.08); z-index:2; }
   #cb-head { background:var(--brand); color:#fff; padding:14px 14px 14px 16px; display:flex; align-items:center; gap:11px; }
-  #cb-head .av { width:38px; height:38px; border-radius:12px; background:rgba(255,255,255,.18); display:grid; place-items:center; position:relative; flex:none; }
-  #cb-head .av::after { content:""; position:absolute; right:-2px; bottom:-2px; width:10px; height:10px; border-radius:50%; background:#36d27f; box-shadow:0 0 0 2px var(--brand); }
+  #cb-head .av { width:38px; height:38px; border-radius:8px; background:rgba(255,255,255,.18); display:grid; place-items:center; flex:none; }
   #cb-title { font-weight:600; font-size:15px; display:block; }
-  #cb-head small { display:block; font-size:12px; opacity:.8; }
+  #cb-head small { display:block; font-size:12px; opacity:.85; }
   #cb-close { display:none; }
-  #cb-log { flex:1; overflow-y:auto; padding:16px 14px 8px; background:#f7f7f8; display:flex; flex-direction:column; gap:7px; }
-  .msg { max-width:86%; padding:10px 13px; border-radius:16px; white-space:pre-wrap; font-size:14px; line-height:1.45; animation:in .4s var(--ease) both; }
-  @keyframes in { from { opacity:0; transform:translateY(8px); } }
-  .bot { background:#fff; border:1px solid #e8e8ec; align-self:flex-start; border-bottom-left-radius:5px; }
-  .user { background:var(--brand); color:#fff; align-self:flex-end; border-bottom-right-radius:5px; }
+  #cb-log { flex:1; overflow-y:auto; padding:16px 14px 8px; background:#f7f7f5; display:flex; flex-direction:column; gap:7px; }
+  .msg { max-width:86%; padding:10px 13px; border-radius:12px; white-space:pre-wrap; font-size:14.5px; line-height:1.45; }
+  .bot { background:#fff; border:1px solid #e6e5e0; align-self:flex-start; border-bottom-left-radius:4px; }
+  .user { background:var(--brand); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
   .typing { display:flex; gap:4px; padding:13px 15px; }
   .typing i { width:6px; height:6px; border-radius:50%; background:#9a9ca5; animation:dot 1s infinite; }
   .typing i:nth-child(2){ animation-delay:.15s } .typing i:nth-child(3){ animation-delay:.3s }
   @keyframes dot { 30% { transform:translateY(-3px); opacity:1 } 0%,60%,100% { opacity:.35 } }
   #cb-chips { padding:9px 12px 3px; display:flex; gap:6px; overflow-x:auto; background:#fff; border-top:1px solid #eee; scrollbar-width:none; }
   #cb-chips::-webkit-scrollbar { display:none; }
-  .chip { flex:none; border:1px solid color-mix(in oklab, var(--brand) 35%, white); color:color-mix(in oklab, var(--brand) 85%, black); background:color-mix(in oklab, var(--brand) 8%, white); border-radius:999px; padding:7px 12px; font-size:12.5px; font-weight:500; cursor:pointer; transition:transform .2s; }
-  .chip:hover { transform:translateY(-1px); }
+  .chip { flex:none; min-height:44px; border:1px solid color-mix(in oklab, var(--brand) 35%, white); color:color-mix(in oklab, var(--brand) 85%, black); background:color-mix(in oklab, var(--brand) 7%, white); border-radius:6px; padding:0 12px; font-size:13.5px; font-weight:500; cursor:pointer; }
   #cb-form { display:flex; gap:8px; padding:10px 12px 12px; background:#fff; }
-  #cb-in { flex:1; min-width:0; border:1px solid #e2e3e8; border-radius:12px; padding:12px 13px; font:15px 'Inter Tight', system-ui, sans-serif; outline:none; }
+  #cb-in { flex:1; min-width:0; border:1px solid #d9d8d2; border-radius:6px; padding:12px 13px; font:16px 'Schibsted Grotesk', system-ui, sans-serif; outline:none; }
   #cb-in:focus { border-color:var(--brand); box-shadow:0 0 0 3px color-mix(in oklab, var(--brand) 18%, transparent); }
-  #cb-send { border:0; background:var(--brand); color:#fff; border-radius:12px; width:46px; cursor:pointer; display:grid; place-items:center; }
-  .cb-foot { font-size:10.5px; color:#9a9ca5; text-align:center; padding:0 10px 10px; background:#fff; margin:0; }
-  /* floating launcher (scrolls to the demo chat) */
-  #cb-btn { position:fixed; right:22px; bottom:22px; z-index:50; display:flex; align-items:center; gap:10px; padding:8px 18px 8px 8px; border-radius:999px; border:1px solid var(--line2); background:rgba(18,20,26,.85); backdrop-filter:blur(10px); color:#fff; font-weight:600; font-size:14px; cursor:pointer; box-shadow:0 20px 40px -14px rgba(0,0,0,.7); opacity:0; transform:translateY(20px); pointer-events:none; transition:all .4s var(--ease); }
-  #cb-btn.show { opacity:1; transform:none; pointer-events:auto; }
-  #cb-btn .ic { width:38px; height:38px; border-radius:50%; background:var(--brand); display:grid; place-items:center; }
+  #cb-send { border:0; background:var(--brand); color:#fff; border-radius:6px; width:48px; min-height:46px; cursor:pointer; display:grid; place-items:center; }
+  .cb-foot { font-size:11.5px; color:#5f616a; text-align:center; padding:0 10px 10px; background:#fff; margin:0; }
+  /* launcher (scrolls back to the demo chat) */
+  #cb-btn { position:fixed; right:18px; bottom:18px; z-index:50; display:flex; align-items:center; gap:10px; min-height:52px; padding:6px 18px 6px 6px; border-radius:8px; border:0; background:var(--ink); color:#fff; font-weight:600; font-size:15px; cursor:pointer; box-shadow:0 10px 24px -12px rgba(0,0,0,.6); opacity:0; pointer-events:none; transition:opacity .25s; }
+  #cb-btn.show { opacity:1; pointer-events:auto; }
+  #cb-btn .ic { width:40px; height:40px; border-radius:6px; background:var(--brand); display:grid; place-items:center; }
   /* sections */
-  section.block { position:relative; z-index:1; padding:110px 0; }
-  .stats { position:relative; z-index:1; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.02); margin-top:70px; }
-  .stats div { padding:26px 28px; border-right:1px solid var(--line); }
-  .stats div:last-child { border-right:0; }
-  .stats b { display:block; font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-size:44px; line-height:1; letter-spacing:-.02em; }
-  .stats span { display:block; margin-top:8px; font-size:13.5px; color:var(--mute); }
-  .eyebrow { font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--brandL); font-weight:600; }
-  h3.title { font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-size:clamp(40px, 5vw, 68px); line-height:1; letter-spacing:-.02em; margin:14px 0 18px; }
-  h3.title em { font-style:italic; color:#c9ccd4; }
-  .sub { color:#9aa0ad; max-width:56ch; margin:0; }
-  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:54px; }
-  .step, .feat { background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); border:1px solid var(--line); border-radius:20px; padding:28px; transition:border-color .3s, transform .4s var(--ease); }
-  .step:hover, .feat:hover { border-color:var(--line2); transform:translateY(-4px); }
-  .step .n { font-family:'Instrument Serif', Georgia, serif; font-size:56px; line-height:1; color:transparent; -webkit-text-stroke:1px rgba(255,255,255,.35); }
-  .step h4, .feat h4 { margin:18px 0 8px; font-size:18px; font-weight:600; letter-spacing:-.01em; }
-  .step p, .feat p { margin:0; color:#9aa0ad; font-size:15px; }
-  .feats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:54px; }
-  .feat .ic { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--soft); color:var(--brandL); border:1px solid color-mix(in oklab, var(--brand) 40%, transparent); }
-  .note { position:relative; z-index:1; border:1px solid rgba(255,214,102,.28); background:rgba(255,214,102,.06); color:#e9dcb5; border-radius:18px; padding:22px 26px; font-size:14.5px; display:flex; gap:16px; align-items:flex-start; }
-  .note b { color:#ffe08a; }
-  footer { position:relative; z-index:1; border-top:1px solid var(--line); padding:34px 0 46px; color:var(--mute); font-size:13.5px; }
+  section.block { padding:88px 0; border-top:1px solid var(--line); }
+  .facts { margin-top:40px; font-size:17px; color:#3b3f47; max-width:62rem; }
+  .facts b { color:var(--ink); }
+  h3.title { font-family:'Newsreader', Georgia, serif; font-weight:500; font-size:clamp(34px, 1.6rem + 2vw, 54px); line-height:1.05; margin:0 0 14px; }
+  .sub { color:#4a4e56; max-width:52ch; margin:0; }
+  .how { display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:56px; }
+  .steps { counter-reset:s; }
+  .steps li { counter-increment:s; display:grid; grid-template-columns:3rem 1fr; gap:12px; padding:22px 0; border-top:1px solid var(--line); }
+  .steps li::before { content:counter(s); font:500 30px/1 'Newsreader', Georgia, serif; color:var(--brand); }
+  .steps h4 { margin:0 0 4px; font-size:19px; }
+  .steps p { margin:0; color:#4a4e56; }
+  .dodont { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:40px; margin-top:36px; }
+  .dodont h4 { margin:0 0 10px; font-size:19px; }
+  .dodont ul { margin:0; padding:0; list-style:none; }
+  .dodont li { padding:12px 0; border-top:1px solid var(--line); }
+  .dodont li b { display:block; }
+  .dodont .no { background:var(--paper2); border:1px solid var(--line); padding:22px 24px; align-self:start; }
+  .dodont .no li { color:#4a4e56; }
+  .note { border-left:4px solid #c99a2e; background:#f7f0dc; color:#3d3420; padding:18px 22px; font-size:15.5px; }
+  footer { border-top:1px solid var(--line); padding:30px 0 90px; color:var(--mute); font-size:14px; }
   footer .wrap { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-  .reveal { opacity:0; transform:translateY(24px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
-  .reveal.in { opacity:1; transform:none; }
+  .reveal { }
   @media (max-width:1020px) {
     header.nav nav { display:none; }
-    .hero-grid { grid-template-columns:1fr; }
-    .steps, .feats { grid-template-columns:1fr 1fr; }
-    .stats { grid-template-columns:1fr 1fr; } .stats div:nth-child(2){ border-right:0; } .stats div:nth-child(-n+2){ border-bottom:1px solid var(--line); }
+    .hero-grid, .how, .dodont { grid-template-columns:1fr; }
   }
   @media (max-width:640px) {
-    .hero { padding-top:44px; }
+    .hero { padding-top:36px; }
     header.nav .btn { display:none; }
     .win-body { height:auto; }
     .site { max-width:none; padding:22px 20px 8px; }
     .site .tiles, .site .sk { display:none; }
     #cb { position:relative; right:auto; bottom:auto; width:auto; height:560px; margin:14px; max-height:none; }
-    .steps, .feats { grid-template-columns:1fr; }
-    .seg a { padding:9px 12px; font-size:14px; }
-    section.block { padding:80px 0; }
-    .stats b { font-size:36px; }
+    section.block { padding:64px 0; }
   }
-  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } .reveal { opacity:1; transform:none; } html { scroll-behavior:auto; } }
+  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } }
 </style>
 </head>
 <body>
-<div class="aurora" aria-hidden="true"></div><div class="gridbg" aria-hidden="true"></div>
 <header class="nav"><div class="wrap">
   <a class="brandmark" href="#top"><span class="sq"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>FAQ Chatbot</a>
   <span class="pill"><span class="dot"></span>Live demo</span>
@@ -164,12 +139,12 @@
 <section class="hero"><div class="wrap">
   <div class="hero-grid">
     <div>
-      <span class="badge"><b>Demo</b>Fictional businesses · nothing is sent anywhere</span>
-      <h1>Answers your customers <em>instantly</em>, even after hours.</h1>
-      <p class="lede">A zero-cost website FAQ chatbot. It runs entirely in the browser, answers from the business’s own FAQ (with typo-tolerant matching), and collects a name and number for callbacks. No monthly AI fees.</p>
+      <span class="badge"><b>Demo.</b> The businesses are fictional and nothing you type is sent anywhere.</span>
+      <h1>The questions your customers ask every day, answered at 10pm too.</h1>
+      <p class="lede">A small FAQ chat for a business website. It answers only from the owner’s own list of questions and answers, copes with typos, and takes a name and number when someone wants a call back. It runs in the browser, so there are no monthly AI fees.</p>
       <div class="switch">
-        <div class="lbl">Demo businesses</div>
-        <div class="seg" role="tablist" aria-label="Demo businesses"><a href="?biz=cafe" data-biz="cafe"><i style="background:#2f6b4f"></i>Cafe</a><a href="?biz=plumber" data-biz="plumber"><i style="background:#1f4e8c"></i>Plumber</a><a href="?biz=salon" data-biz="salon"><i style="background:#8c3b6e"></i>Hair salon</a></div>
+        <div class="lbl">Pick a demo business</div>
+        <nav class="seg" aria-label="Demo businesses"><a href="?biz=cafe" data-biz="cafe"><i style="background:#2f6b4f"></i>Cafe</a><a href="?biz=plumber" data-biz="plumber"><i style="background:#1f4e8c"></i>Plumber</a><a href="?biz=salon" data-biz="salon"><i style="background:#8c3b6e"></i>Hair salon</a></nav>
       </div>
       <div class="tries" id="tries"><span>Try asking:</span></div>
     </div>
@@ -195,42 +170,40 @@
       </div>
     </div>
   </div>
-  <div class="stats reveal">
-    <div><b>$0</b><span>monthly AI fees</span></div>
-    <div><b>24/7</b><span>answers, even after hours</span></div>
-    <div><b>1 line</b><span>of code to add to a site</span></div>
-    <div><b>Typos ok</b><span>fuzzy keyword matching</span></div>
+  <p class="facts"><b>$0 a month</b> to run. Answers <b>day and night</b>. Added to a site with <b>one line of code</b>. Understands “opne sunday?” as well as “open Sunday?”.</p>
+</div></section>
+
+<section class="block" id="how"><div class="wrap how">
+  <div><h3 class="title">How it works</h3><p class="sub">It matches each question to the business’s own answers by keyword, so it never makes things up.</p></div>
+  <ol class="steps" style="list-style:none;margin:0;padding:0">
+    <li><div><h4>Write the FAQ once</h4><p>Hours, prices, bookings, parking: the questions customers ask every day, answered in the owner’s own words.</p></div></li>
+    <li><div><h4>Customers ask in their own words</h4><p>Questions are matched by keyword with typo tolerance. Quick-reply buttons help on phones.</p></div></li>
+    <li><div><h4>Callbacks come to the owner</h4><p>When someone wants a booking or a person, it asks for a name and a phone number or email.</p></div></li>
+  </ol>
+</div></section>
+
+<section class="block" id="features"><div class="wrap">
+  <h3 class="title">What it does, and what it won’t</h3>
+  <div class="dodont">
+    <div><h4>Does</h4><ul>
+      <li><b>Only approved answers</b>Every reply comes from the owner’s list.</li>
+      <li><b>Works on any site</b>WordPress, Wix, Squarespace or plain HTML, with one line of code.</li>
+      <li><b>Takes callback details</b>Name, phone or email, and a note.</li>
+      <li><b>Room to grow</b>Can later be connected to a free-tier AI model for open-ended questions, if the owner wants that.</li></ul></div>
+    <div class="no"><h4>Won’t</h4><ul>
+      <li>Invent prices, hours or promises.</li>
+      <li>Charge per message or per month.</li>
+      <li>Send anything you type in this demo anywhere.</li></ul></div>
   </div>
 </div></section>
 
-<section class="block" id="how"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">How it works</div><h3 class="title">Your answers, <em>not a guess.</em></h3><p class="sub">The chatbot matches each question to the business’s own FAQ answers using keywords and fuzzy matching, so it never makes things up.</p></div>
-  <div class="steps">
-    <div class="step reveal"><div class="n">01</div><h4>Write the FAQ once</h4><p>Hours, prices, bookings, parking: the questions customers ask every day, answered in the owner’s own words.</p></div>
-    <div class="step reveal"><div class="n">02</div><h4>Customers just ask</h4><p>Questions are matched by keyword with typo tolerance (“opne sunday?” still works). Quick-reply chips help too.</p></div>
-    <div class="step reveal"><div class="n">03</div><h4>Leads come to you</h4><p>When someone wants a booking or a human, it collects their name and contact details for a callback.</p></div>
-  </div>
-</div></section>
-
-<section class="block" id="features" style="padding-top:0"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">Features</div><h3 class="title">Small, fast, <em>and free to run.</em></h3></div>
-  <div class="feats">
-    <div class="feat reveal"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2s1 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.4 0-2.5-.6-3-1.5M12 6v12"/></svg></span><h4>No monthly fees</h4><p>Runs in the visitor’s browser. No API keys, no per-message costs.</p></div>
-    <div class="feat reveal"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span><h4>Only approved answers</h4><p>Every reply comes from the owner’s FAQ list, so there are no hallucinations.</p></div>
-    <div class="feat reveal"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><h4>Lead capture</h4><p>Collects name, phone or email and a note for bookings and callbacks.</p></div>
-    <div class="feat reveal"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></span><h4>One-line install</h4><p>Drops into any existing website: WordPress, Wix, Squarespace or plain HTML.</p></div>
-    <div class="feat reveal"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><h4>Mobile-first</h4><p>Quick-reply chips and a thumb-friendly layout for customers on their phones.</p></div>
-    <div class="feat reveal"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></span><h4>Upgradeable</h4><p>Can later be connected to a free-tier AI model for open-ended questions, if wanted.</p></div>
-  </div>
-</div></section>
-
-<section class="block" id="about-demo" style="padding-top:0"><div class="wrap">
-  <div class="note reveal"><span style="font-size:20px">ⓘ</span><div>This is a <b>demo</b> of a zero-cost website FAQ chatbot. The businesses (Kōwhai Corner Café, Harbour Flow Plumbing, Ponsonby Shears) are <b>fictional</b> and all their details are made up. Nothing you type is sent anywhere; demo “leads” are only saved in your own browser’s local storage.</div></div>
+<section class="block" id="about-demo" style="padding-top:0;border-top:0"><div class="wrap">
+  <div class="note"><div>This is a <b>demo</b> of a zero-cost website FAQ chatbot. The businesses (Kōwhai Corner Café, Harbour Flow Plumbing, Ponsonby Shears) are <b>fictional</b> and all their details are made up. Nothing you type is sent anywhere; demo “leads” are only saved in your own browser’s local storage.</div></div>
 </div></section>
 </main>
-<footer><div class="wrap"><span>FAQ Chatbot · demo with fictional businesses</span><span>Runs entirely in your browser · no data leaves this page</span></div></footer>
+<footer><div class="wrap"><span>FAQ chatbot demo with fictional businesses</span><span>Runs entirely in your browser. No data leaves this page.</span></div></footer>
 
-<button id="cb-btn" aria-label="Open chat"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>Chat with the demo</button>
+<button id="cb-btn" aria-label="Chat with the demo"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span>Chat with the demo</button>
 
 <script>
 /* ===== Business configs: edit these to customise for a real client ===== */
@@ -240,7 +213,7 @@ const BUSINESSES = {
     tag: "Fictional neighbourhood café, Auckland",
     color: "#2f6b4f",
     about: "Coffee, cabinet food and all-day brunch. <i>All details below are made up for this demo.</i>",
-    greeting: "Kia ora! 👋 I'm the Kōwhai Corner Café assistant. Ask me about hours, menu, dietary options, bookings or parking.",
+    greeting: "Kia ora! I'm the Kōwhai Corner Café assistant. Ask me about hours, menu, dietary options, bookings or parking.",
     chips: ["Opening hours", "Gluten free?", "Book a table", "Parking", "Catering"],
     faqs: [
       { k: ["hour","open","close","closing","time","sunday","saturday","weekend","public holiday","today"], a: "We're open Mon–Fri 7am–3pm and Sat–Sun 8am–2pm. Public holidays: 8am–1pm." },
@@ -250,7 +223,7 @@ const BUSINESSES = {
       { k: ["park","parking","car"], a: "There's free 60-minute street parking out front and a council car park 2 minutes' walk away." },
       { k: ["coffee","price","cost","how much","flat white","latte"], a: "Flat white / latte $5.50, long black $5, large +$1, alt milk +$0.80. Brunch mains are $18–26." },
       { k: ["cater","catering","platter","office","event"], a: "Yes! Platters from $65 (feeds ~10). 48 hours' notice please. Leave your details and we'll send the catering menu.", lead:true },
-      { k: ["dog","pet"], a: "Dogs are welcome at our outdoor tables, and we have a water bowl out front 🐶" },
+      { k: ["dog","pet"], a: "Dogs are welcome at our outdoor tables, and we have a water bowl out front." },
       { k: ["wifi","wi-fi","internet","laptop","work"], a: "Free Wi-Fi is available. Ask at the counter for the password." },
       { k: ["pay","eftpos","card","cash","afterpay"], a: "We accept EFTPOS, Visa/Mastercard, Apple/Google Pay and cash." },
       { k: ["where","address","location","find","direction"], a: "This is a demo café, so there's no real address. A real business would put its address and a Google Maps link here." },
@@ -281,7 +254,7 @@ const BUSINESSES = {
     tag: "Fictional hair salon, Auckland",
     color: "#8c3b6e",
     about: "Cuts, colour and blow-waves. <i>All details below are made up for this demo.</i>",
-    greeting: "Hi there! I'm the Ponsonby Shears assistant ✂️ Ask about prices, hours, booking or products.",
+    greeting: "Hi there! I'm the Ponsonby Shears assistant. Ask about prices, hours, booking or products.",
     chips: ["Prices", "Opening hours", "Book", "Kids cuts", "Cancellation"],
     faqs: [
       { k: ["price","cost","how much","cut","colour","color","foil","balayage"], a: "Women's cut & blow-wave from $85, men's cut $45, kids (under 12) $30, half-head foils from $160, balayage from $220." },
@@ -335,7 +308,7 @@ function answer(raw) {
   if (leadStep === 3) { lead.note = /^no$/i.test(raw.trim()) ? "" : raw; leadStep = 0;
     try { const all = JSON.parse(localStorage.getItem("demo_leads")||"[]"); all.push({...lead, at:new Date().toISOString()}); localStorage.setItem("demo_leads", JSON.stringify(all)); } catch(e){}
     console.log("NEW LEAD", lead);
-    return say("✅ Thanks! We've got your details and will be in touch soon.\n(Demo note: on a real site this would be emailed to the owner, e.g. via a free form service.)"); }
+    return say("Thanks! We've got your details and will be in touch soon.\n(Demo note: on a real site this would be emailed to the owner, e.g. via a free form service.)"); }
   if (/^(hi|hello|hey|kia ora|gday|g'day)\b/.test(q)) return say("Hi! How can I help? You can ask about: " + biz.chips.join(", ") + ".");
   if (/(thank|cheers|ta\b)/.test(q)) return say("You're welcome! Anything else?");
   if (/(human|person|staff|call me|talk to|speak to|contact)/.test(q)) { leadStep = 1; return say("Sure, I'll get someone to contact you. What's your name?"); }
